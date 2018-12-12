@@ -1,0 +1,188 @@
+//TMRpcm library is needed
+
+#include "SD.h"
+#define SD_ChipSelectPin 4
+#include "TMRpcm.h"
+#include "SPI.h"
+#include <SoftwareSerial.h>
+byte Bytes = 0;
+byte Bytess = 0;
+TMRpcm tmrpcm;
+SoftwareSerial Data(2,3);
+void setup()
+{
+tmrpcm.speakerPin=9;
+Serial.begin(9600);
+Data.begin(9600);
+if(!SD.begin(SD_ChipSelectPin))
+{
+  Serial.println("SD fail");
+  return;
+}
+Serial.println("SD Success");
+tmrpcm.setVolume(6);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+   if(Data.available() > 0) {
+    Bytes = Data.read();
+    if(Bytes != 0xFF)
+    {
+      if(Bytess != Bytes)
+      {
+         Serial.print(Bytes,HEX);
+          Bytess = Bytes;
+          if(Bytes == 0x00)
+          {
+            tmrpcm.stopPlayback();
+          }
+          if (Bytes == 0x01)
+          {
+            tmrpcm.play("Bad.wav");
+          }
+          else if (Bytes == 0x02)
+          {
+            tmrpcm.play("Believe.wav");
+          }
+          else if (Bytes == 0x03)
+          {
+            tmrpcm.play("Believer.wav");
+          }
+          else if (Bytes == 0x04)
+          {
+            tmrpcm.play("Burn.wav");
+          }
+          else if (Bytes == 0x05)
+          {
+            tmrpcm.play("Calypso.wav");
+          }
+          else if (Bytes == 0x06)
+          {
+            tmrpcm.play("CalypsoR.wav");
+          }
+          else if (Bytes == 0x07)
+          {
+            tmrpcm.play("Closer.wav");
+          }
+          else if (Bytes == 0x08)
+          {
+            tmrpcm.play("Dilemma.wav");
+          }
+          else if (Bytes == 0x09)
+          {
+            tmrpcm.play("Dynamite.wav");
+          }
+          else if (Bytes == 0x10)
+          {
+            tmrpcm.play("Farsante.wav");
+          }
+          else if (Bytes == 0x11)
+          {
+            tmrpcm.play("Finesse.wav");
+          }
+          else if (Bytes == 0x12)
+          {
+            tmrpcm.play("Firework.wav");
+          }
+          else if (Bytes == 0x13)
+          {
+            tmrpcm.play("Galaxies.wav");
+          }
+          else if (Bytes == 0x14)
+          {
+            tmrpcm.play("Grenade.wav");
+          }
+          else if (Bytes == 0x15)
+          {
+            tmrpcm.play("Halo.wav");
+          }
+          else if (Bytes == 0x16)
+          {
+            tmrpcm.play("Hello.wav");
+          }
+          else if (Bytes == 0x17)
+          {
+            tmrpcm.play("Imagine.wav");
+          }
+          else if (Bytes == 0x18)
+          {
+            tmrpcm.play("KissYou.wav");
+          }
+          else if (Bytes == 0x19)
+          {
+            tmrpcm.play("Macarena.wav");
+          }
+          else if (Bytes == 0x20)
+          {
+            tmrpcm.play("MarryYou.wav");
+          }
+          else if (Bytes == 0x21)
+          {
+            tmrpcm.play("Payphone.wav");
+          }
+          else if (Bytes == 0x22)
+          {
+            tmrpcm.play("Perfect.wav");
+          }
+          else if (Bytes == 0x23)
+          {
+            tmrpcm.play("PerfectB.wav");
+          }
+          else if (Bytes == 0x24)
+          {
+            tmrpcm.play("Physical.wav");
+          }
+          else if (Bytes == 0x25)
+          {
+            tmrpcm.play("Replay.wav");
+          }
+          else if (Bytes == 0x26)
+          {
+            tmrpcm.play("ReplayZ.wav");
+          }
+          else if (Bytes == 0x27)
+          {
+            tmrpcm.play("Royals.wav");
+          }
+              else if (Bytes == 0x28)
+          {
+            tmrpcm.play("SheWolf.wav");
+          }
+          else if (Bytes == 0x29)
+          {
+            tmrpcm.play("Stronger.wav");
+          }
+          else if (Bytes == 0x30)
+          {
+            tmrpcm.play("Thriller.wav");
+          }
+           else if (Bytes == 0x31)
+          {
+            tmrpcm.play("Titanium.wav");
+          }
+           else if (Bytes == 0x32)
+          {
+            tmrpcm.play("Toxic.wav");
+          }
+           else if (Bytes == 0x33)
+          {
+            tmrpcm.play("Umbrella.wav");
+          }
+          else if (Bytes == 0x34)
+          {
+            tmrpcm.play("Vogue.wav");
+          }
+          else if (Bytes == 0x35)
+          {
+            tmrpcm.play("Yeah.wav");
+          }
+          else {
+            tmrpcm.stopPlayback();
+          }
+    }
+    }
+  }
+  
+}
