@@ -1,0 +1,292 @@
+/*
+ * SecondBoard.c
+ *
+ * Created: 11/7/2018 21:25:28
+ * Author : karen
+ */ 
+
+#include <avr/io.h>
+#include "usart_ATmega1284.h"
+#include "timer.h"
+#include "io.c"
+#include "spi.h"
+unsigned int j = 0x00;
+unsigned int i = 0;
+unsigned char done = 0x00;
+
+enum SM_States {SM_Init, SM_Mic} SM_State;
+
+int main(void)
+{
+    /* Replace with your application code */
+	DDRA = 0xFF; PORTA = 0x00;
+	DDRC = 0xFF; PORTC = 0x00;
+	DDRD = 0xFF; PORTD = 0x00;
+	unsigned char Data = 0x00;
+	initUSART(0);
+	LCD_init();
+	TimerOn();
+	TimerSet(500);
+	SPI_ServantInit();
+	SM_State = SM_Init;
+    while (1) 
+    {
+		if(j < 0x0B)
+		{
+			LCD_DisplayString(1, "Welcome I'm MARIA");
+			j++;
+		}
+		Data = receivedData;
+		PORTA = Data;
+		if (Data == 0x01)
+		{
+			LCD_DisplayString(1,"Bad - Michael   Jackson");
+				PORTA = 0x0F;
+				PORTA = 0xF0;
+		}
+		else if (Data == 0x02)
+		{
+			LCD_DisplayString(1,"Believe - Cher");
+			PORTA = 0xFF;
+			PORTA = 0x00;
+			PORTA = 0xFF;
+			PORTA = 0x00;
+			PORTA = 0xFF;
+			PORTA = 0x00;
+		}
+		else if (Data == 0x03)
+		{
+			LCD_DisplayString(1,"Believer - ImagineDragons");
+			PORTA = 0x33;
+			PORTA = 0xCC;
+		}
+		else if (Data == 0x04)
+		{
+			LCD_DisplayString(1,"Burn - Usher");
+			PORTA = 0xAA;
+			PORTA = 0x55;
+			
+		}
+		else if (Data == 0x05)
+		{
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+			LCD_DisplayString(1,"Calypso - Luis  Fonsi");
+		}
+		else if (Data == 0x06)
+		{
+			LCD_DisplayString(1,"Calypso Remix - Luis Fonsi");
+			PORTA = 0xAA;
+			PORTA = 0x55;
+		}
+		else if (Data == 0x07)
+		{
+			LCD_DisplayString(1,"Closer -        Chainsmokers");
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+		}
+		else if (Data == 0x08)
+		{
+			LCD_DisplayString(1,"Dilemma - Nelly");
+			PORTA = 0x33;
+			PORTA = 0xCC;
+		}
+		else if (Data == 0x09)
+		{
+			LCD_DisplayString(1,"Dynamite - Taio Cruz");
+			PORTA = 0xFF;
+			PORTA = 0x00;
+		}
+		else if (Data == 0x10)
+		{
+			LCD_DisplayString(1,"Farsante - Ozuna");
+			PORTA = 0xAA;
+			PORTA = 0x55;
+		}
+		else if (Data == 0x11)
+		{
+			LCD_DisplayString(1,"Finesse - Bruno Mars");
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+		}
+		else if (Data == 0x12)
+		{
+			LCD_DisplayString(1,"Firework - Katy Perry");
+			PORTA = 0x33;
+			PORTA = 0xCC;
+		}
+		else if (Data == 0x13)
+		{
+			LCD_DisplayString(1,"Galaxies - Owl  City");
+			PORTA = 0xAA;
+			PORTA = 0x55;
+		}
+		else if (Data == 0x14)
+		{
+			LCD_DisplayString(1,"Grenade - Bruno Mars");
+			PORTA = 0xFF;
+			PORTA = 0x00;
+		}
+		else if (Data == 0x15)
+		{
+			LCD_DisplayString(1,"Halo - Beyonce");
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+		}
+		else if (Data == 0x16)
+		{
+			LCD_DisplayString(1,"Hello - Adele");
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+		}
+		else if (Data == 0x17)
+		{
+			LCD_DisplayString(1,"Imagine - John  Lennon");
+			PORTA = 0xAA;
+			PORTA = 0x55;
+		}
+		else if (Data == 0x18)
+		{
+			LCD_DisplayString(1,"Kiss You - One  Direction");
+			PORTA = 0x33;
+			PORTA = 0xCC;
+		}
+		else if (Data == 0x19)
+		{
+			LCD_DisplayString(1,"Macarena - Los  Del Rio");
+			PORTA = 0xFF;
+			PORTA = 0x00;
+		}
+		else if (Data == 0x20)
+		{
+			LCD_DisplayString(1,"Marry You -     Bruno Mars");
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+		}
+		else if (Data == 0x21)
+		{
+			LCD_DisplayString(1,"Payphone -      Maroon 5");
+			PORTA = 0xFF;
+			PORTA = 0x00;
+		}
+		else if (Data == 0x22)
+		{
+			LCD_DisplayString(1,"Perfect - Ed    Sheeran");
+			PORTA = 0x33;
+			PORTA = 0xCC;
+		}
+		else if (Data == 0x23)
+		{
+			LCD_DisplayString(1,"Perfect Remix - Ed Sheeran");
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+		}
+		else if (Data == 0x24)
+		{
+			LCD_DisplayString(1,"Physical - OlivaNewton-John");
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+		}
+		else if (Data == 0x25)
+		{
+			LCD_DisplayString(1,"Replay - Iyaz");
+			PORTA = 0xFF;
+			PORTA = 0x00;
+		}
+		else if (Data == 0x26)
+		{
+			LCD_DisplayString(1,"Replay - Zendaya");
+			PORTA = 0x33;
+			PORTA = 0xCC;
+		}
+		else if (Data == 0x27)
+		{
+			LCD_DisplayString(1,"Royals - Lorde");
+			PORTA = 0xFF;
+			PORTA = 0x00;
+		}
+		else if (Data == 0x28)
+		{
+			LCD_DisplayString(1,"She Wolf -      Shakira");
+			PORTA = 0xAA;
+			PORTA = 0x55;
+		}
+		else if (Data == 0x29)
+		{
+			LCD_DisplayString(1,"Stronger - KellyClarkson");
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+		}
+		else if (Data == 0x30)
+		{
+			LCD_DisplayString(1,"Thriller -      Michael Jackson");
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+		}
+		else if (Data == 0x31)
+		{
+			LCD_DisplayString(1,"Titanium - DavidGuetta");
+			PORTA = 0xAA;
+			PORTA = 0x55;
+		}
+		else if (Data == 0x32)
+		{
+			LCD_DisplayString(1,"Toxic - Britney Spears");
+			PORTA = 0xFF;
+			PORTA = 0x00;
+		}
+		else if (Data == 0x33)
+		{
+			LCD_DisplayString(1,"Umbrella -      Rihanna");
+			PORTA = 0x33;
+			PORTA = 0xCC;
+		}
+		else if (Data == 0x34)
+		{
+			LCD_DisplayString(1,"Vogue - Madonna");
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+		}
+		else if (Data == 0x35)
+		{
+			LCD_DisplayString(1,"Yeah - Usher");
+			PORTA = 0x0F;
+			PORTA = 0xF0;
+		}
+		else if (Data == 0x80)
+		{
+			LCD_DisplayString(1,"Bad or Thriller? Michael Jackson");
+		}
+		else if (Data == 0x81)
+		{
+			LCD_DisplayString(1,"Burn or Yeah?   Usher");
+		}
+		else if (Data == 0x83)
+		{
+			LCD_DisplayString(1,"Calypso-Calypso Remix? Luis Fons");
+		}
+		else if (Data == 0x85)
+		{
+			LCD_DisplayString(1,"Finesse, Grenadeor Marry You");
+		}
+		else if (Data == 0x87)
+		{
+			LCD_DisplayString(1,"Perfect-Perfect  Remix? ED S.");
+		}
+		else if (Data == 0x88)
+		{
+			LCD_DisplayString(1,"Zendaya or Iyaz?");
+		}
+		else{
+			LCD_DisplayString(1, "Use Bluetooth orSay Artist/Song");
+		}
+		if (USART_IsSendReady(0))
+		{
+			USART_Send(Data,0);
+			USART_Flush(0);
+		}
+		while (!TimerFlag);
+		TimerFlag = 0;
+    }
+}
+
